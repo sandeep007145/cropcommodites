@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <h5>{{conditionChecker.from}}</h5>
+    <div class="col-md-12">
+      <span>
+        <button class="btn" *ngIf="!conditionChecker.open" (click)="openAndCloseCrop(crops,'open')">
+          <i class="fa fa-plus"></i>
+        </button>
+        <button class="btn" *ngIf="conditionChecker.open" (click)="openAndCloseCrop(crops,'close')">
+          <i class="fa fa-minus"></i>
+        </button>
+        <i class="fa fa-folder"></i>{{crops.name}}</span>
+      <ul *ngIf="conditionChecker.open">
+        <li *ngFor="let child of crops.children; let i = index">
+          <span>
+            <button class="btn" *ngIf="!child.show" (click)="firstLevel(child.name,'open', i)">
+              <i class="fa fa-plus"></i>
+            </button>
+            <button class="btn" *ngIf="child.show" (click)="firstLevel(child.name,'close', i)">
+              <i class="fa fa-minus"></i>
+            </button>
+            <i class="fa fa-folder"></i>{{child.name}}</span>
+          <!-- firstChild -->
+          <ul *ngIf="child.show">
+            <li *ngFor="let secondChild of treeViewer.secondlevel; let j = index">
+              <span>
+                <button class="btn" *ngIf="!secondChild.show" (click)="secondLevelfunc(secondChild.name,'open', j)">
+                  <i class="fa fa-plus"></i>
+                </button>
+                <button class="btn" *ngIf="secondChild.show" (click)="secondLevelfunc(secondChild.name,'close', j)">
+                  <i class="fa fa-minus"></i>
+                </button>
+                <i class="fa fa-folder"></i>{{secondChild.name}}</span>
+              <!-- secondChild -->
+              <ul *ngIf="secondChild.show">
+                <li *ngFor="let thirdlevel of treeViewer.thirdLevel; let k = index">
+                  <span>
+                    <button class="btn" *ngIf="!thirdlevel.show" (click)="thirdlevelfun(thirdlevel.rel,'open', k)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                    <button class="btn" *ngIf="thirdlevel.show" (click)="thirdlevelfun(thirdlevel.rel,'close', k)">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                    <i class="fa fa-folder"></i>{{thirdlevel.rel}}</span>
+                  <!-- fourthLevel -->
+                  <ul *ngIf="thirdlevel.show">
+                    <li *ngFor="let fourtlevel of treeViewer.fourthLevel; let k = index">
+                      <span>
+                        <button class="btn" *ngIf="!fourtlevel.show">
+                          <i class="fa fa-plus"></i>
+                        </button>
+                        <button class="btn" *ngIf="fourtlevel.show">
+                          <i class="fa fa-minus"></i>
+                        </button>
+                        <i class="fa fa-folder"></i>{{fourtlevel.name}}</span>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
