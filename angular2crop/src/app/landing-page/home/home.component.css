@@ -1,0 +1,8 @@
+ul {
+    list-style-type: none;
+  }
+  .fa-folder:before {
+    content: "\f07b";
+    color: #c1c119;
+}
+
